@@ -42,8 +42,8 @@ namespace Folder_Crawling
             this.findAllCheck = new System.Windows.Forms.CheckBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.bfsBox = new System.Windows.Forms.CheckBox();
+            this.dfsBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // title
@@ -179,6 +179,7 @@ namespace Folder_Crawling
             this.searchButton.TabIndex = 11;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // label1
             // 
@@ -192,41 +193,43 @@ namespace Folder_Crawling
             this.label1.TabIndex = 12;
             this.label1.Text = "Input Metode Pencarian";
             // 
-            // checkBox1
+            // bfsBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(25, 572);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(5);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(187, 24);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "Breadth First Search";
-            this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.bfsBox.AutoSize = true;
+            this.bfsBox.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.bfsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bfsBox.Location = new System.Drawing.Point(25, 572);
+            this.bfsBox.Margin = new System.Windows.Forms.Padding(5);
+            this.bfsBox.Name = "bfsBox";
+            this.bfsBox.Size = new System.Drawing.Size(187, 24);
+            this.bfsBox.TabIndex = 13;
+            this.bfsBox.Text = "Breadth First Search";
+            this.bfsBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bfsBox.UseVisualStyleBackColor = true;
+            this.bfsBox.CheckedChanged += new System.EventHandler(this.bfsBox_CheckedChanged);
             // 
-            // checkBox2
+            // dfsBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(25, 620);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(5);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(173, 24);
-            this.checkBox2.TabIndex = 14;
-            this.checkBox2.Text = "Depth First Search";
-            this.checkBox2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.dfsBox.AutoSize = true;
+            this.dfsBox.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.dfsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dfsBox.Location = new System.Drawing.Point(25, 620);
+            this.dfsBox.Margin = new System.Windows.Forms.Padding(5);
+            this.dfsBox.Name = "dfsBox";
+            this.dfsBox.Size = new System.Drawing.Size(173, 24);
+            this.dfsBox.TabIndex = 14;
+            this.dfsBox.Text = "Depth First Search";
+            this.dfsBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.dfsBox.UseVisualStyleBackColor = true;
+            this.dfsBox.CheckedChanged += new System.EventHandler(this.dfsBox_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 953);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.dfsBox);
+            this.Controls.Add(this.bfsBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.findAllCheck);
@@ -262,8 +265,8 @@ namespace Folder_Crawling
         private System.Windows.Forms.CheckBox findAllCheck;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox bfsBox;
+        private System.Windows.Forms.CheckBox dfsBox;
     }
 }
 
