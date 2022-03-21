@@ -18,6 +18,24 @@ namespace Folder_Crawling
             InitializeComponent();
         }
 
+        private void chooseButton_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            folderBrowser.Description = "Select starting Directory";
+            folderBrowser.ShowNewFolderButton = true;
 
+            DialogResult result = folderBrowser.ShowDialog(); 
+            
+            if(result == DialogResult.OK)
+            {
+                printStarting.Text = folderBrowser.SelectedPath;
+                Console.WriteLine(folderBrowser.RootFolder);
+            }else if(result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+
+        }
     }
 }

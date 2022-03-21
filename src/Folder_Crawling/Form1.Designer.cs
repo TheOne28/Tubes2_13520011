@@ -137,6 +137,7 @@ namespace Folder_Crawling
             this.chooseButton.Text = "Choose Folder";
             this.chooseButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.chooseButton.UseVisualStyleBackColor = true;
+            this.chooseButton.Click += new System.EventHandler(this.chooseButton_Click);
             // 
             // printStarting
             // 
@@ -144,6 +145,7 @@ namespace Folder_Crawling
             this.printStarting.Name = "printStarting";
             this.printStarting.Size = new System.Drawing.Size(222, 22);
             this.printStarting.TabIndex = 8;
+            this.printStarting.Text = "No File Chosen";
             // 
             // inputName
             // 
