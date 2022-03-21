@@ -153,6 +153,8 @@ namespace Folder_Crawling
             this.inputName.Name = "inputName";
             this.inputName.Size = new System.Drawing.Size(353, 22);
             this.inputName.TabIndex = 9;
+            this.inputName.Text = "No File Name Given";
+            this.inputName.TextChanged += new System.EventHandler(this.inputName_TextChanged);
             // 
             // findAllCheck
             // 
@@ -167,6 +169,7 @@ namespace Folder_Crawling
             this.findAllCheck.Text = "Find All Occurence";
             this.findAllCheck.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.findAllCheck.UseVisualStyleBackColor = true;
+            this.findAllCheck.CheckedChanged += new System.EventHandler(this.findAllCheck_CheckedChanged);
             // 
             // searchButton
             // 
