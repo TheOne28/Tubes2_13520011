@@ -61,6 +61,7 @@
   <ItemGroup>
 	<Compile Include="BFS.cs"></Compile>
 	<Compile Include="DFS.cs"></Compile>  
+	<Compile Include="Utils.cs"></Compile>  
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
