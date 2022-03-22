@@ -6,6 +6,7 @@ namespace Folder_Crawling
 {
     public static class Utils
     {
+        // Mengembalikan array listFolder yang berisi seluruh folder yang ada di dalam folder bernama path
         public static string[] getFolders(string path)
         {
             DirectoryInfo directory = new DirectoryInfo(@path);
@@ -21,6 +22,7 @@ namespace Folder_Crawling
             return listFolder;
         }
 
+        // Mengembalikan array listFiles yang berisi seluruh file yang ada di dalam folder bernama path 
         public static string[] getFiles(string path)
         {
             DirectoryInfo directory = new DirectoryInfo(@path);
