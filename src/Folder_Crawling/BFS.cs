@@ -6,11 +6,14 @@ namespace Folder_Crawling
 {
 	public class BFS
 	{
-		private String filename; // Nama File yang ingin diari
-		private String startingFolder; //Starting Folder
-		private bool findAll; //FindAllOccurences
-		private List<string[]> AdjacentVertices { get; set; }
-        private List<(int, string, string)> ListDirectories {get; set; }
+		private String filename; // Nama File yang ingin dicari
+		private String startingFolder; // Starting Folder
+		private bool findAll; // FindAllOccurences
+		private List<string[]> AdjacentVertices { get; set; } // Simpul-simpul yang berdekatan (keseluruhan folder dan file yang bertetanggaan dengan current node) 
+        private List<(int, string, string)> ListDirectories {get; set; } // List of tuple yang berisi seluruh folder dan file yang ada di dalam startingFolder
+                                                                         // Item1 bernilai 0 jika current node berupa folder dan bernilai 1 jika berupa file
+                                                                         // Item2 berisi nama folder atau file
+                                                                         // Item3 berisi path dari Item2 
 
 		//Construcor Kelas
 		public BFS(String filename, String startingFolder, bool findAll)
@@ -23,6 +26,8 @@ namespace Folder_Crawling
             this.ListDirectories.Add((0, startingFolder, startingFolder));
 		}
 
+        // Mengembalikan indeks letak directory (current node atau file atau folder) dari List ListDirectories
+        // Bernilai -1 jika tidak ditemukan 
 		public int getindex(string directory) {
             for (int i = 0; i < this.ListDirectories.Count; i++) {
                 if (this.ListDirectories[i].Item2 == directory) {
@@ -32,6 +37,9 @@ namespace Folder_Crawling
             return -1;
         }
 
+        // Membuat graf dengan root yaitu startingFolder
+        // Mencatat seluruh tetangga dari setiap directory dimulai dari startingFolder atau root di dalam AdjacentVertices 
+        // Belum menghandle findAllOccurences
 		public void makeGraph(string root)
         {
             string path = root;
@@ -72,8 +80,10 @@ namespace Folder_Crawling
             }
         }
 
+        // Melakukan proses pencarian file dengan nama file filename dengan algoritma Breadth First Search
+        // Proses pencarian dimulai dari startVertex yang merupakan indeks dari simpul di dalam ListDirectories
 		public void doBFS(int startVertex, string filename) {
-			// This array is maintained to track the vertices that are visited
+			// Array ini untuk menandai setiap simpul yang dikunjungi
             bool[] visited = new bool[this.ListDirectories.Count];
 
             Queue<int> queue = new Queue<int>();
