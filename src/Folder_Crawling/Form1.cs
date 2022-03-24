@@ -17,12 +17,27 @@ namespace Folder_Crawling
         private bool findAll;
         private bool isBFS;
         private bool isDFS;
+        private Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
+        private Microsoft.Msagl.Drawing.Graph graph;
 
         public Form1()
         {
             InitializeComponent();
             this.nameFile = "";
             this.pathFolder = "";
+            this.viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+            this.graph = new Microsoft.Msagl.Drawing.Graph("graph");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //bind the graph to the viewer
+            viewer.Graph = graph;
+            //associate the viewer with the form
+            this.SuspendLayout();
+            viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphPanel.Controls.Add(viewer);
+            this.ResumeLayout();
         }
 
         //Handling Choose Folder Path
@@ -95,7 +110,7 @@ namespace Folder_Crawling
             }else if (this.isBFS)
             {
                 BFS bfs = new BFS(nameFile, pathFolder, findAll);
-                bfs.run();
+                bfs.run(viewer, graph);
             }
             else
             {
@@ -106,6 +121,10 @@ namespace Folder_Crawling
 
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }

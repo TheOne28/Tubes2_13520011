@@ -44,6 +44,7 @@ namespace Folder_Crawling
             this.label1 = new System.Windows.Forms.Label();
             this.bfsBox = new System.Windows.Forms.CheckBox();
             this.dfsBox = new System.Windows.Forms.CheckBox();
+            this.graphPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // title
@@ -223,11 +224,19 @@ namespace Folder_Crawling
             this.dfsBox.UseVisualStyleBackColor = true;
             this.dfsBox.CheckedChanged += new System.EventHandler(this.dfsBox_CheckedChanged);
             // 
+            // graphPanel
+            // 
+            this.graphPanel.Location = new System.Drawing.Point(438, 164);
+            this.graphPanel.Name = "graphPanel";
+            this.graphPanel.Size = new System.Drawing.Size(1432, 767);
+            this.graphPanel.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 953);
+            this.Controls.Add(this.graphPanel);
             this.Controls.Add(this.dfsBox);
             this.Controls.Add(this.bfsBox);
             this.Controls.Add(this.label1);
@@ -245,6 +254,7 @@ namespace Folder_Crawling
             this.Controls.Add(this.title);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,6 +277,7 @@ namespace Folder_Crawling
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox bfsBox;
         private System.Windows.Forms.CheckBox dfsBox;
+        private System.Windows.Forms.Panel graphPanel;
     }
 }
 

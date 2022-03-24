@@ -142,19 +142,18 @@ namespace Folder_Crawling
             }
 		}
 		//Aku kepikirannya buat bfs nya ngisi di sini gitu, nanti dipanggil di main
-		public void run()
+		public void run(Microsoft.Msagl.GraphViewerGdi.GViewer viewer, Microsoft.Msagl.Drawing.Graph graph)
 		{
-			Console.WriteLine("Masukkan path folder:");
-            string root = Console.ReadLine();
+            graph.AddEdge("A", "B");
+            graph.AddEdge("B", "C");
+            graph.FindNode("A").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
+            graph.FindNode("B").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Green;
+            Microsoft.Msagl.Drawing.Node c = graph.FindNode("C");
+            c.Attr.FillColor = Microsoft.Msagl.Drawing.Color.PaleGreen;
+            c.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
 
-            Console.WriteLine("Masukkan nama file yang ingin dicari:");
-            string filename = Console.ReadLine();
-
-            BFS g = new BFS(filename, root, false);
-            g.makeGraph(root);
-            
-            //Console.WriteLine("List of visited nodes: ");
-            g.doBFS(0, filename);
+            this.makeGraph(this.startingFolder);
+            this.doBFS(0, this.filename);
 		}
 
 	}
