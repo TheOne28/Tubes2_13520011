@@ -114,7 +114,7 @@ namespace Folder_Crawling
             }
             else
             {
-                DFS dfs = new DFS(nameFile, pathFolder, findAll);
+                DFS dfs = new DFS(0,nameFile, pathFolder, findAll);
                 dfs.run();
             }
 

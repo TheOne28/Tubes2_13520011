@@ -6,11 +6,14 @@ namespace Folder_Crawling
 {
 	public class BFS
 	{
-		private String filename; // Nama File yang ingin diari
-		private String startingFolder; //Starting Folder
-		private bool findAll; //FindAllOccurences
-		private List<string[]> AdjacentVertices { get; set; }
-        private List<(int, string, string)> ListDirectories {get; set; }
+		private String filename; // Nama File yang ingin dicari
+		private String startingFolder; // Starting Folder
+		private bool findAll; // FindAllOccurences
+		private List<string[]> AdjacentVertices { get; set; } // Simpul-simpul yang berdekatan (keseluruhan folder dan file yang bertetanggaan dengan current node) 
+        private List<(int, string, string)> ListDirectories {get; set; } // List of tuple yang berisi seluruh folder dan file yang ada di dalam startingFolder
+                                                                         // Item1 bernilai 0 jika current node berupa folder dan bernilai 1 jika berupa file
+                                                                         // Item2 berisi nama folder atau file
+                                                                         // Item3 berisi path dari Item2 
 
 		//Construcor Kelas
 		public BFS(String filename, String startingFolder, bool findAll)
@@ -23,6 +26,8 @@ namespace Folder_Crawling
             this.ListDirectories.Add((0, startingFolder, startingFolder));
 		}
 
+        // Mengembalikan indeks letak directory (current node atau file atau folder) dari List ListDirectories
+        // Bernilai -1 jika tidak ditemukan 
 		public int getindex(string directory) {
             for (int i = 0; i < this.ListDirectories.Count; i++) {
                 if (this.ListDirectories[i].Item2 == directory) {
@@ -32,46 +37,24 @@ namespace Folder_Crawling
             return -1;
         }
 
-		public string[] getFolders(string path) {
-            DirectoryInfo directory = new DirectoryInfo(@path);
-            DirectoryInfo[] directories = directory.GetDirectories();
-
-            string[] listFolder = new string[directories.GetLength(0)];
-            int ptr = 0;
-            foreach(DirectoryInfo folder in directories) {
-                listFolder[ptr] = folder.Name;
-                ptr++;
-            }
-            return listFolder;
-        }
-
-		public string[] getFiles(string path) {
-            DirectoryInfo directory = new DirectoryInfo(@path);
-            FileInfo[] files = directory.GetFiles();
-
-            string[] listFiles = new string[files.GetLength(0)];
-            int ptr = 0;
-            foreach (FileInfo file in files) {
-                listFiles[ptr] = file.Name;
-                ptr++;
-            }
-            return listFiles;
-        }
-
+        // Membuat graf dengan root yaitu startingFolder
+        // Mencatat seluruh tetangga dari setiap directory dimulai dari startingFolder atau root di dalam AdjacentVertices 
+        // Belum menghandle findAllOccurences
 		public void makeGraph(string root)
         {
             string path = root;
             int ptr = 0;
             while (ptr < this.ListDirectories.Count) {
+                if (ptr != 0)
                 path = this.ListDirectories[ptr].Item3;
                 if (this.ListDirectories[ptr].Item1 == 0) {
-                    string[] listFolder = this.getFolders(path);
+                    string[] listFolder = Utils.getFolders(path);
                     for (int i = 0; i < listFolder.Length; i++) {
                         this.ListDirectories.Add((0, listFolder[i], path + "\\" + listFolder[i]));
                         //Console.WriteLine(listFolder[i]);
                     }
 
-                    string[] listFiles = this.getFiles(path);
+                    string[] listFiles = Utils.getFiles(path);
                     for (int i = 0; i < listFiles.Length; i++) {
                         this.ListDirectories.Add((1, listFiles[i], path + "\\" + listFiles[i]));
                         //Console.WriteLine(listFiles[i]);
@@ -97,8 +80,10 @@ namespace Folder_Crawling
             }
         }
 
+        // Melakukan proses pencarian file dengan nama file filename dengan algoritma Breadth First Search
+        // Proses pencarian dimulai dari startVertex yang merupakan indeks dari simpul di dalam ListDirectories
 		public void doBFS(int startVertex, string filename) {
-			// This array is maintained to track the vertices that are visited
+			// Array ini untuk menandai setiap simpul yang dikunjungi
             bool[] visited = new bool[this.ListDirectories.Count];
 
             Queue<int> queue = new Queue<int>();
@@ -114,7 +99,6 @@ namespace Folder_Crawling
                 //Console.WriteLine(startVertex);
 
                 if (this.ListDirectories[startVertex].Item1 == 1) {
-                    //Console.WriteLine(this.ListDirectories[startVertex].Item2);
                     if (this.ListDirectories[startVertex].Item2 == filename) {
                         Console.WriteLine("Path file yang dicari: ");
                         Console.WriteLine(this.ListDirectories[startVertex].Item3);
@@ -144,15 +128,16 @@ namespace Folder_Crawling
 		//Aku kepikirannya buat bfs nya ngisi di sini gitu, nanti dipanggil di main
 		public void run(Microsoft.Msagl.GraphViewerGdi.GViewer viewer, Microsoft.Msagl.Drawing.Graph graph)
 		{
-            graph.AddEdge("A", "B");
-            graph.AddEdge("B", "C");
-            graph.FindNode("A").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Red;
-            graph.FindNode("B").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Green;
-            Microsoft.Msagl.Drawing.Node c = graph.FindNode("C");
-            c.Attr.FillColor = Microsoft.Msagl.Drawing.Color.PaleGreen;
-            c.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
-
+			/*Console.WriteLine("Masukkan path folder:");
+            string root = Console.ReadLine();
+        
+            Console.WriteLine("Masukkan nama file yang ingin dicari:");
+            string filename = Console.ReadLine();
+            
+            BFS g = new BFS(filename, root, false);*/
             this.makeGraph(this.startingFolder);
+            
+            Console.WriteLine("List of visited nodes: ");
             this.doBFS(0, this.filename);
 		}
 

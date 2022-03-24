@@ -5,21 +5,51 @@ namespace Folder_Crawling
 	public class DFS
 	{
 		private String filename; // Nama File yang ingin diari
-		private String startingFolder; //Starting Folder
+		private String startingFolder { get; set; } //Starting Folder
+		private int level; //level = 0 untuk pemanggilan dfs pertama
 		private bool findAll; //FindAllOccurences
-
+		private string solution { get; set; }
+		private bool found;
 		//Construcor Kelas
-		public DFS(String filename, String startingFolder, bool findAll)
+		public DFS(int level, String filename, String startingFolder, bool findAll)
 		{
+			this.level = level;
 			this.filename = filename;
 			this.startingFolder = startingFolder;
 			this.findAll = findAll;
+			this.found = false;
 		}
-
+		public void doDFS(string startingFolder, string filename)
+        {
+			string[] listfiles = Utils.getFiles(startingFolder);
+			foreach(string file in listfiles)
+            {
+				if (file == filename) 
+				{ 
+					this.solution = this.startingFolder + "\\" + file;
+					this.found = true;
+					Console.WriteLine(this.solution);
+				}
+				//Console.WriteLine(file);
+			}
+			string[] listfolder = Utils.getFolders(startingFolder);
+			if ((!this.findAll && !this.found )|| (this.findAll ) )
+				foreach(string folder in listfolder)
+				{
+					DFS child = new DFS(this.level + 1, this.filename, this.startingFolder + "\\" + folder, this.findAll);
+					child.doDFS(child.startingFolder, filename);
+					if (child.found) {
+						this.found = true;
+						break;
+					}
+				}
+        }
 		//Aku kepikirannya buat dfs nya ngisi di sini gitu, nanti dipanggil di main
 		public void run()
 		{
-
+			Console.WriteLine("Hasil Pencarian : ");
+			this.doDFS(this.startingFolder, this.filename);
+			if (!this.found) Console.WriteLine("File tidak ditemukan");
 		}
 	}
 
