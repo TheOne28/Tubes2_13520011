@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Msagl.Drawing;
 
 namespace Folder_Crawling
 {
@@ -17,28 +18,16 @@ namespace Folder_Crawling
         private bool findAll;
         private bool isBFS;
         private bool isDFS;
-        private Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
-        private Microsoft.Msagl.Drawing.Graph graph;
+        public static Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+        public static Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
 
         public Form1()
         {
             InitializeComponent();
             this.nameFile = "";
             this.pathFolder = "";
-            this.viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
-            this.graph = new Microsoft.Msagl.Drawing.Graph("graph");
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //bind the graph to the viewer
-            viewer.Graph = graph;
-            //associate the viewer with the form
-            this.SuspendLayout();
-            viewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphPanel.Controls.Add(viewer);
-            this.ResumeLayout();
-        }
 
         //Handling Choose Folder Path
         private void chooseButton_Click(object sender, EventArgs e)
@@ -86,7 +75,16 @@ namespace Folder_Crawling
 
         //Handling searchButton
         private void searchButton_Click(object sender, EventArgs e)
-        {
+        {   
+            foreach(Edge edge in Form1.graph.Edges.ToArray()){
+                Form1.graph.RemoveEdge(edge);
+            }
+
+            foreach(Node node in Form1.graph.Nodes.ToArray())
+            {
+                Form1.graph.RemoveNode(node);
+            }
+
             if(this.nameFile == "")
             {
                 MessageBox.Show("Please input File Name");
@@ -115,16 +113,24 @@ namespace Folder_Crawling
             else
             {
                 DFS dfs = new DFS(0,nameFile, pathFolder, findAll);
-                dfs.run();
+                string result = dfs.run();
+                linkLabel1.Text = result;
             }
-
-
+            Form1.viewer.Graph = Form1.graph;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void graphPanel_Paint(object sender, PaintEventArgs e)
         {
-
+            Form1.viewer.Graph = Form1.graph;
+            Form1.viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            Form1.viewer.ToolBarIsVisible = false;
+            this.graphPanel.Controls.Add(viewer);
         }
 
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(linkLabel1.Text);
+        }
     }
 }

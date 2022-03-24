@@ -45,6 +45,7 @@ namespace Folder_Crawling
             this.bfsBox = new System.Windows.Forms.CheckBox();
             this.dfsBox = new System.Windows.Forms.CheckBox();
             this.graphPanel = new System.Windows.Forms.Panel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // title
@@ -228,14 +229,28 @@ namespace Folder_Crawling
             // 
             this.graphPanel.Location = new System.Drawing.Point(438, 164);
             this.graphPanel.Name = "graphPanel";
-            this.graphPanel.Size = new System.Drawing.Size(1432, 767);
+            this.graphPanel.Size = new System.Drawing.Size(1290, 460);
             this.graphPanel.TabIndex = 15;
+            this.graphPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.graphPanel_Paint);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(432, 693);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(146, 32);
+            this.linkLabel1.TabIndex = 16;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "linkLabel1";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 953);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.graphPanel);
             this.Controls.Add(this.dfsBox);
             this.Controls.Add(this.bfsBox);
@@ -254,7 +269,6 @@ namespace Folder_Crawling
             this.Controls.Add(this.title);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,6 +292,7 @@ namespace Folder_Crawling
         private System.Windows.Forms.CheckBox bfsBox;
         private System.Windows.Forms.CheckBox dfsBox;
         private System.Windows.Forms.Panel graphPanel;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 
