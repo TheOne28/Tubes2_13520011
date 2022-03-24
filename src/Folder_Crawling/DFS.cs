@@ -46,8 +46,8 @@ namespace Folder_Crawling
 					child.doDFS(child.startingFolder, filename);
 					if (child.found) {
 						this.found = true;
-						break;
 					}
+					if (!this.findAll) break;
 				}
         }
 		//Aku kepikirannya buat dfs nya ngisi di sini gitu, nanti dipanggil di main
