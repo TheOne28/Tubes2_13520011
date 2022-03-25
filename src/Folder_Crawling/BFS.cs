@@ -87,7 +87,6 @@ namespace Folder_Crawling
         // Melakukan proses pencarian file dengan nama file filename dengan algoritma Breadth First Search
         // Proses pencarian dimulai dari startVertex yang merupakan indeks dari simpul di dalam ListDirectories
 		public void DoBFS(int startVertex, string filename) {
-            Console.WriteLine("Path file yang dicari: ");
             // Array ini untuk menandai setiap simpul yang dikunjungi
             bool[] visited = new bool[this.ListDirectories.Count];
 
@@ -101,8 +100,6 @@ namespace Folder_Crawling
             while(queue.Count != 0)
             {
                 startVertex = queue.Dequeue();
-                Console.WriteLine("HEAD");
-                Console.WriteLine(this.ListDirectories[startVertex].Item2);
                 visited[startVertex] = true;
 
                 if (this.ListDirectories[startVertex].Item1 == 1) {
@@ -144,18 +141,10 @@ namespace Folder_Crawling
 		//Aku kepikirannya buat bfs nya ngisi di sini gitu, nanti dipanggil di main
 		public string Run()
 		{
-            /*
-			Console.WriteLine("Masukkan path folder:");
-            string root = Console.ReadLine();
-        
-            Console.WriteLine("Masukkan nama file yang ingin dicari:");
-            string filename = Console.ReadLine();
-            */
 
             BFS g = new BFS(this.filename, this.startingFolder, false);
             this.MakeGraph(this.startingFolder);
             
-            Console.WriteLine("List of visited nodes: ");
             this.DoBFS(0, this.filename);
             return this.solution;
         }

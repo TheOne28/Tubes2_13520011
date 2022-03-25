@@ -34,13 +34,11 @@ namespace Folder_Crawling
 					Form1.graph.AddEdge(last, file).Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
 					this.solution = this.startingFolder + "\\" + file + "\n";
 					this.found = true;
-					Console.WriteLine(this.solution);
 				}
                 else
                 {
 					Form1.graph.AddEdge(last, file);
                 }
-				//Console.WriteLine(file);
 			}
 			string[] listfolder = Utils.getFolders(startingFolder);
 			if ((!this.findAll && !this.found )|| (this.findAll ) )
@@ -63,11 +61,9 @@ namespace Folder_Crawling
 		//Aku kepikirannya buat dfs nya ngisi di sini gitu, nanti dipanggil di main
 		public string run()
 		{
-			Console.WriteLine("Hasil Pencarian : ");
 			this.doDFS(this.startingFolder, this.filename);
 			if (!this.found)
             {
-				Console.WriteLine("File tidak ditemukan");
 				return "";
             }
             else

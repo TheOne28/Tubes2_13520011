@@ -145,11 +145,51 @@ namespace Folder_Crawling
         {   
             if(result != "")
             {
-                PathLink.Text = result;
-                PathLink.Visible = true;
+                if (this.findAll)
+                {
+                    char[] delims = new[] { '\r', '\n' };
+                    string[] allFound = result.Split(delims, StringSplitOptions.RemoveEmptyEntries);
+
+
+                    string thisPath = allFound[allFound.Length - 1];
+
+                    string[] splitted = thisPath.Split('\\');
+
+                    string final = "";
+
+                    for(int i = 0; i < splitted.Length - 1; i++)
+                    {
+                        final += splitted[i];
+                        if(i != splitted.Length - 2)
+                        {
+                            final += '\\';
+                        }
+                    }
+
+                    PathLink.Text = final;
+                    PathLink.Visible = true;
+
+                }
+                else
+                {
+                    string[] splitted = result.Split('\\');
+
+                    string final = "";
+
+                    for (int i = 0; i < splitted.Length - 1; i++)
+                    {
+                        final += splitted[i];
+                        if (i != splitted.Length - 2)
+                        {
+                            final += '\\';
+                        }
+                    }
+                    PathLink.Text = final;
+                    PathLink.Visible = true;
+                }
             }
             else
-            {
+            {   
                 LabelNotFound.Text = "File tidak ditemukan!!";
                 LabelNotFound.Visible = true;
             }
