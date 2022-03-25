@@ -107,7 +107,7 @@ namespace Folder_Crawling
 
                 if (this.ListDirectories[startVertex].Item1 == 1) {
                     if (this.ListDirectories[startVertex].Item2 == filename) {
-                        this.solution += this.ListDirectories[startVertex].Item3;
+                        this.solution += (this.ListDirectories[startVertex].Item3 + '\n');
                         Console.WriteLine(this.ListDirectories[startVertex].Item3);
                         this.found = true;
                         if (!findAll) {

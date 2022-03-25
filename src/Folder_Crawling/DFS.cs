@@ -29,13 +29,17 @@ namespace Folder_Crawling
 			string[] listfiles = Utils.getFiles(startingFolder);
 			foreach(string file in listfiles)
             {
-				if (file == filename) 
-				{ 
+				if (file == filename)
+				{
 					Form1.graph.AddEdge(last, file).Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
-					this.solution = this.startingFolder + "\\" + file+ "\n";
+					this.solution = this.startingFolder + "\\" + file + "\n";
 					this.found = true;
 					Console.WriteLine(this.solution);
 				}
+                else
+                {
+					Form1.graph.AddEdge(last, file);
+                }
 				//Console.WriteLine(file);
 			}
 			string[] listfolder = Utils.getFolders(startingFolder);

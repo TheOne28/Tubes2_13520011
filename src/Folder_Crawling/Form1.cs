@@ -142,11 +142,20 @@ namespace Folder_Crawling
         }
 
         private void PosProcessing(string result, long time)
-        {
-            PathLink.Text = result;
-            PathLink.Visible = true;
+        {   
+            if(result != "")
+            {
+                PathLink.Text = result;
+                PathLink.Visible = true;
+            }
+            else
+            {
+                LabelNotFound.Text = "File tidak ditemukan!!";
+                LabelNotFound.Visible = true;
+            }
 
-            TimeSpent.Text = time.ToString();
+            TimeSpent.Text = time.ToString() + "ms";
+            TimeSpent.Visible = true;
         }
 
         private void ClearGraph()
@@ -161,6 +170,8 @@ namespace Folder_Crawling
                 Form1.graph.RemoveNode(node);
             }
             PathLink.Visible = false;
+            LabelNotFound.Visible = false;
+            TimeSpent.Visible = false;
         }
     }
 }
