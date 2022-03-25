@@ -19,8 +19,8 @@ namespace Folder_Crawling
 			this.startingFolder = startingFolder;
 			this.findAll = findAll;
 			this.found = false;
+			this.solution = "";
 		}
-
 
 		public void doDFS(string startingFolder, string filename)
         {
@@ -29,10 +29,10 @@ namespace Folder_Crawling
 			string[] listfiles = Utils.getFiles(startingFolder);
 			foreach(string file in listfiles)
             {
-				Form1.graph.AddEdge(last, file);
 				if (file == filename) 
 				{ 
-					this.solution = this.startingFolder + "\\" + file;
+					Form1.graph.AddEdge(last, file).Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
+					this.solution = this.startingFolder + "\\" + file+ "\n";
 					this.found = true;
 					Console.WriteLine(this.solution);
 				}
@@ -42,13 +42,18 @@ namespace Folder_Crawling
 			if ((!this.findAll && !this.found )|| (this.findAll ) )
 				foreach(string folder in listfolder)
 				{
-					Form1.graph.AddEdge(last, folder);
 					DFS child = new DFS(this.level + 1, this.filename, this.startingFolder + "\\" + folder, this.findAll);
 					child.doDFS(child.startingFolder, filename);
 					if (child.found) {
 						this.found = true;
+						this.solution += child.solution;
+						Form1.graph.AddEdge(last, folder).Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
+						if (!this.findAll) break;
+					} else
+                    {
+						Form1.graph.AddEdge(last, folder);
+
 					}
-					if (!this.findAll) break;
 				}
         }
 		//Aku kepikirannya buat dfs nya ngisi di sini gitu, nanti dipanggil di main
