@@ -21,6 +21,7 @@ namespace Folder_Crawling
 			this.found = false;
 		}
 
+
 		public void doDFS(string startingFolder, string filename)
         {
 			string[] split = startingFolder.Split('\\');

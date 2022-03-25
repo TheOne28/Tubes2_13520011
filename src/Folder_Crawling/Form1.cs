@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using Microsoft.Msagl.Drawing;
 
 namespace Folder_Crawling
@@ -28,9 +29,8 @@ namespace Folder_Crawling
             this.pathFolder = "";
         }
 
-
         //Handling Choose Folder Path
-        private void chooseButton_Click(object sender, EventArgs e)
+        private void ChooseButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
             folderBrowser.Description = "Select starting Directory";
@@ -65,25 +65,22 @@ namespace Folder_Crawling
         private void dfsBox_CheckedChanged(object sender, EventArgs e)
         {
             this.isDFS = dfsBox.Checked;
+            bfsBox.Checked = false;
+            this.isBFS = false;
         }
 
         //Handling BFS Check Box
         private void bfsBox_CheckedChanged(object sender, EventArgs e)
         {
             this.isBFS = bfsBox.Checked;
+            dfsBox.Checked = false;
+            this.isDFS = false;
         }
 
         //Handling searchButton
         private void searchButton_Click(object sender, EventArgs e)
-        {   
-            foreach(Edge edge in Form1.graph.Edges.ToArray()){
-                Form1.graph.RemoveEdge(edge);
-            }
-
-            foreach(Node node in Form1.graph.Nodes.ToArray())
-            {
-                Form1.graph.RemoveNode(node);
-            }
+        {
+            ClearGraph();
 
             if(this.nameFile == "")
             {
@@ -101,20 +98,32 @@ namespace Folder_Crawling
             {
                 MessageBox.Show("Please choose searching method");
                 return;
-            }else if(this.isBFS && this.isDFS)
-            {
-                MessageBox.Show("Please choose only one searching method ");
-                return;
             }else if (this.isBFS)
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 BFS bfs = new BFS(nameFile, pathFolder, findAll);
-                bfs.run(viewer, graph);
+                bfs.Run();
+
+                stopwatch.Stop();
+
+                string result = "";
+                long time = stopwatch.ElapsedMilliseconds;
+                PosProcessing(result, time);
             }
             else
             {
                 DFS dfs = new DFS(0,nameFile, pathFolder, findAll);
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 string result = dfs.run();
-                linkLabel1.Text = result;
+
+                stopwatch.Stop();
+                long time = stopwatch.ElapsedMilliseconds;
+
+                PosProcessing(result, time);
             }
             Form1.viewer.Graph = Form1.graph;
         }
@@ -123,14 +132,36 @@ namespace Folder_Crawling
         private void graphPanel_Paint(object sender, PaintEventArgs e)
         {
             Form1.viewer.Graph = Form1.graph;
-            Form1.viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            Form1.viewer.Dock = DockStyle.Fill;
             Form1.viewer.ToolBarIsVisible = false;
             this.graphPanel.Controls.Add(viewer);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(linkLabel1.Text);
+            Process.Start(PathLink.Text);
+        }
+
+        private void PosProcessing(string result, long time)
+        {
+            PathLink.Text = result;
+            PathLink.Visible = true;
+
+            TimeSpent.Text = time.ToString();
+        }
+
+        private void ClearGraph()
+        {
+            foreach (Edge edge in Form1.graph.Edges.ToArray())
+            {
+                Form1.graph.RemoveEdge(edge);
+            }
+
+            foreach (Node node in Form1.graph.Nodes.ToArray())
+            {
+                Form1.graph.RemoveNode(node);
+            }
+            PathLink.Visible = false;
         }
     }
 }

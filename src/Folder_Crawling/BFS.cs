@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace Folder_Crawling
 {
-	public class BFS
+	public class BFS: Form1
 	{
-		private String filename; // Nama File yang ingin dicari
-		private String startingFolder; // Starting Folder
+		private string filename; // Nama File yang ingin dicari
+		private string startingFolder; // Starting Folder
 		private bool findAll; // FindAllOccurences
         private bool found;
 		private List<string[]> AdjacentVertices { get; set; } // Simpul-simpul yang berdekatan (keseluruhan folder dan file yang bertetanggaan dengan current node) 
@@ -23,13 +23,15 @@ namespace Folder_Crawling
 			this.startingFolder = startingFolder;
 			this.findAll = findAll;
 			this.AdjacentVertices = new List<string[]>();
-            this.ListDirectories = new List<(int,string, string)>();
-            this.ListDirectories.Add((0, startingFolder, startingFolder));
+            this.ListDirectories = new List<(int, string, string)>()
+            {
+                (0, startingFolder, startingFolder)
+            };
 		}
 
         // Mengembalikan indeks letak directory (current node atau file atau folder) dari List ListDirectories
         // Bernilai -1 jika tidak ditemukan 
-		public int getindex(string path) {
+		public int GetIndex(string path) {
             for (int i = 0; i < this.ListDirectories.Count; i++) {
                 if (this.ListDirectories[i].Item3.Equals(path)) {
                     return i;
@@ -41,7 +43,7 @@ namespace Folder_Crawling
         // Membuat graf dengan root yaitu startingFolder
         // Mencatat seluruh tetangga dari setiap directory dimulai dari startingFolder atau root di dalam AdjacentVertices 
         // Belum menghandle findAllOccurences
-		public void makeGraph(string root)
+		public void MakeGraph(string root)
         {
             string path = root;
             int ptr = 0;
@@ -82,7 +84,7 @@ namespace Folder_Crawling
 
         // Melakukan proses pencarian file dengan nama file filename dengan algoritma Breadth First Search
         // Proses pencarian dimulai dari startVertex yang merupakan indeks dari simpul di dalam ListDirectories
-		public void doBFS(int startVertex, string filename) {
+		public void DoBFS(int startVertex, string filename) {
             Console.WriteLine("Path file yang dicari: ");
             // Array ini untuk menandai setiap simpul yang dikunjungi
             bool[] visited = new bool[this.ListDirectories.Count];
@@ -93,9 +95,15 @@ namespace Folder_Crawling
 
             queue.Enqueue(startVertex);
 
+            List<string> allhead = new List<string>();
+            allhead.Add(GetLast(this.startingFolder));
+            int iterate = 0;
+
             while(queue.Count != 0)
             {
                 startVertex = queue.Dequeue();
+                Console.WriteLine("HEAD");
+                Console.WriteLine(this.ListDirectories[startVertex].Item2);
                 visited[startVertex] = true;
 
                 if (this.ListDirectories[startVertex].Item1 == 1) {
@@ -112,9 +120,10 @@ namespace Folder_Crawling
                         for (int i = 0; i < this.AdjacentVertices[startVertex].Length; i++)
                         {
                             string vertex = this.AdjacentVertices[startVertex][i];
-                            int idxvertex = getindex(vertex);
+                            Form1.graph.AddEdge(allhead[iterate], GetLast(vertex));
+                            int idxvertex = GetIndex(vertex);
                             if (!visited[idxvertex])
-                            {
+                            {   
                                 visited[idxvertex] = true;
                                 queue.Enqueue(idxvertex);
                             }
@@ -126,8 +135,14 @@ namespace Folder_Crawling
                 Console.WriteLine("File tidak ditemukan");
             }
 		}
+
+        private string GetLast(string toFind)
+        {
+            string[] toSplit = toFind.Split('\\');
+            return toSplit[toSplit.Length - 1];
+        }
 		//Aku kepikirannya buat bfs nya ngisi di sini gitu, nanti dipanggil di main
-		public void run(Microsoft.Msagl.GraphViewerGdi.GViewer viewer, Microsoft.Msagl.Drawing.Graph graph)
+		public void Run()
 		{
             /*
 			Console.WriteLine("Masukkan path folder:");
@@ -138,10 +153,10 @@ namespace Folder_Crawling
             */
 
             BFS g = new BFS(this.filename, this.startingFolder, false);
-            this.makeGraph(this.startingFolder);
+            this.MakeGraph(this.startingFolder);
             
             Console.WriteLine("List of visited nodes: ");
-            this.doBFS(0, this.filename);
+            this.DoBFS(0, this.filename);
 		}
 
 	}

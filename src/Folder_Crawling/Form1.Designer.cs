@@ -45,7 +45,10 @@ namespace Folder_Crawling
             this.bfsBox = new System.Windows.Forms.CheckBox();
             this.dfsBox = new System.Windows.Forms.CheckBox();
             this.graphPanel = new System.Windows.Forms.Panel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.PathLink = new System.Windows.Forms.LinkLabel();
+            this.PathLabel = new System.Windows.Forms.Label();
+            this.TimeLabel = new System.Windows.Forms.Label();
+            this.TimeSpent = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // title
@@ -68,7 +71,7 @@ namespace Folder_Crawling
             this.horizontalLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.horizontalLine.Location = new System.Drawing.Point(-3, 76);
             this.horizontalLine.Name = "horizontalLine";
-            this.horizontalLine.Size = new System.Drawing.Size(1927, 10);
+            this.horizontalLine.Size = new System.Drawing.Size(2134, 10);
             this.horizontalLine.TabIndex = 1;
             // 
             // inputLabel
@@ -89,7 +92,7 @@ namespace Folder_Crawling
             | System.Windows.Forms.AnchorStyles.Right)));
             this.outputLabel.AutoSize = true;
             this.outputLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outputLabel.Location = new System.Drawing.Point(715, 104);
+            this.outputLabel.Location = new System.Drawing.Point(695, 104);
             this.outputLabel.Name = "outputLabel";
             this.outputLabel.Size = new System.Drawing.Size(104, 36);
             this.outputLabel.TabIndex = 3;
@@ -103,7 +106,7 @@ namespace Folder_Crawling
             this.verticalLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.verticalLine.Location = new System.Drawing.Point(396, 86);
             this.verticalLine.Name = "verticalLine";
-            this.verticalLine.Size = new System.Drawing.Size(10, 866);
+            this.verticalLine.Size = new System.Drawing.Size(10, 1142);
             this.verticalLine.TabIndex = 4;
             // 
             // directoryLabel
@@ -139,7 +142,7 @@ namespace Folder_Crawling
             this.chooseButton.Text = "Choose Folder";
             this.chooseButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.chooseButton.UseVisualStyleBackColor = true;
-            this.chooseButton.Click += new System.EventHandler(this.chooseButton_Click);
+            this.chooseButton.Click += new System.EventHandler(this.ChooseButton_Click);
             // 
             // printStarting
             // 
@@ -227,30 +230,68 @@ namespace Folder_Crawling
             // 
             // graphPanel
             // 
-            this.graphPanel.Location = new System.Drawing.Point(438, 164);
+            this.graphPanel.Location = new System.Drawing.Point(425, 144);
             this.graphPanel.Name = "graphPanel";
-            this.graphPanel.Size = new System.Drawing.Size(1290, 460);
+            this.graphPanel.Size = new System.Drawing.Size(1000, 500);
             this.graphPanel.TabIndex = 15;
             this.graphPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.graphPanel_Paint);
             // 
-            // linkLabel1
+            // PathLink
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(432, 693);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(146, 32);
-            this.linkLabel1.TabIndex = 16;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.PathLink.AutoSize = true;
+            this.PathLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PathLink.Location = new System.Drawing.Point(512, 709);
+            this.PathLink.Name = "PathLink";
+            this.PathLink.Size = new System.Drawing.Size(146, 32);
+            this.PathLink.TabIndex = 16;
+            this.PathLink.TabStop = true;
+            this.PathLink.Text = "linkLabel1";
+            this.PathLink.Visible = false;
+            this.PathLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // PathLabel
+            // 
+            this.PathLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PathLabel.AutoSize = true;
+            this.PathLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PathLabel.Location = new System.Drawing.Point(419, 661);
+            this.PathLabel.Name = "PathLabel";
+            this.PathLabel.Size = new System.Drawing.Size(132, 36);
+            this.PathLabel.TabIndex = 17;
+            this.PathLabel.Text = "Path File";
+            // 
+            // TimeLabel
+            // 
+            this.TimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TimeLabel.AutoSize = true;
+            this.TimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimeLabel.Location = new System.Drawing.Point(419, 751);
+            this.TimeLabel.Name = "TimeLabel";
+            this.TimeLabel.Size = new System.Drawing.Size(165, 36);
+            this.TimeLabel.TabIndex = 18;
+            this.TimeLabel.Text = "Time Spent";
+            // 
+            // TimeSpent
+            // 
+            this.TimeSpent.AutoSize = true;
+            this.TimeSpent.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimeSpent.Location = new System.Drawing.Point(590, 757);
+            this.TimeSpent.Name = "TimeSpent";
+            this.TimeSpent.Size = new System.Drawing.Size(79, 29);
+            this.TimeSpent.TabIndex = 19;
+            this.TimeSpent.Text = "label3";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 953);
-            this.Controls.Add(this.linkLabel1);
+            this.ClientSize = new System.Drawing.Size(1490, 951);
+            this.Controls.Add(this.TimeSpent);
+            this.Controls.Add(this.TimeLabel);
+            this.Controls.Add(this.PathLabel);
+            this.Controls.Add(this.PathLink);
             this.Controls.Add(this.graphPanel);
             this.Controls.Add(this.dfsBox);
             this.Controls.Add(this.bfsBox);
@@ -267,8 +308,9 @@ namespace Folder_Crawling
             this.Controls.Add(this.inputLabel);
             this.Controls.Add(this.horizontalLine);
             this.Controls.Add(this.title);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Folder Crawling";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,7 +334,10 @@ namespace Folder_Crawling
         private System.Windows.Forms.CheckBox bfsBox;
         private System.Windows.Forms.CheckBox dfsBox;
         private System.Windows.Forms.Panel graphPanel;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel PathLink;
+        private System.Windows.Forms.Label PathLabel;
+        private System.Windows.Forms.Label TimeLabel;
+        private System.Windows.Forms.Label TimeSpent;
     }
 }
 
