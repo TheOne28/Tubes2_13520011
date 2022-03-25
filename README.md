@@ -36,7 +36,7 @@ Berikut adalah langkah yang dapat diikuti untuk menjalankan sistem operasi ini.
 1. Buka folder bin/debug
 2. Jalankan Folder_Crawling.exe
 
-## Kelompok 17 - mampOS
+## Kelompok 55 - 13520011
 - Muhammad Akyas David Al Aleey	13520011 
 - Fadil Fauzani 13520032 
 - Vincent Prasetiya Atmadja	13520099
