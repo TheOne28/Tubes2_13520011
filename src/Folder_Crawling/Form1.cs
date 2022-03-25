@@ -104,11 +104,10 @@ namespace Folder_Crawling
                 stopwatch.Start();
 
                 BFS bfs = new BFS(nameFile, pathFolder, findAll);
-                bfs.Run();
+                string result = bfs.Run();
 
                 stopwatch.Stop();
 
-                string result = "";
                 long time = stopwatch.ElapsedMilliseconds;
                 PosProcessing(result, time);
             }

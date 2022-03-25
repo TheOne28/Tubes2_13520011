@@ -127,7 +127,7 @@ namespace Folder_Crawling
             | System.Windows.Forms.AnchorStyles.Right)));
             this.inputFileName.AutoSize = true;
             this.inputFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputFileName.Location = new System.Drawing.Point(19, 336);
+            this.inputFileName.Location = new System.Drawing.Point(19, 322);
             this.inputFileName.Name = "inputFileName";
             this.inputFileName.Size = new System.Drawing.Size(223, 36);
             this.inputFileName.TabIndex = 6;
@@ -154,7 +154,7 @@ namespace Folder_Crawling
             // 
             // inputName
             // 
-            this.inputName.Location = new System.Drawing.Point(25, 397);
+            this.inputName.Location = new System.Drawing.Point(25, 381);
             this.inputName.Name = "inputName";
             this.inputName.Size = new System.Drawing.Size(353, 22);
             this.inputName.TabIndex = 9;
@@ -166,7 +166,7 @@ namespace Folder_Crawling
             this.findAllCheck.AutoSize = true;
             this.findAllCheck.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.findAllCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.findAllCheck.Location = new System.Drawing.Point(25, 438);
+            this.findAllCheck.Location = new System.Drawing.Point(24, 421);
             this.findAllCheck.Margin = new System.Windows.Forms.Padding(5);
             this.findAllCheck.Name = "findAllCheck";
             this.findAllCheck.Size = new System.Drawing.Size(174, 24);
@@ -192,7 +192,7 @@ namespace Folder_Crawling
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(19, 505);
+            this.label1.Location = new System.Drawing.Point(19, 488);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(331, 36);
             this.label1.TabIndex = 12;
@@ -203,7 +203,7 @@ namespace Folder_Crawling
             this.bfsBox.AutoSize = true;
             this.bfsBox.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.bfsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bfsBox.Location = new System.Drawing.Point(25, 572);
+            this.bfsBox.Location = new System.Drawing.Point(25, 551);
             this.bfsBox.Margin = new System.Windows.Forms.Padding(5);
             this.bfsBox.Name = "bfsBox";
             this.bfsBox.Size = new System.Drawing.Size(187, 24);
@@ -218,7 +218,7 @@ namespace Folder_Crawling
             this.dfsBox.AutoSize = true;
             this.dfsBox.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.dfsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dfsBox.Location = new System.Drawing.Point(25, 620);
+            this.dfsBox.Location = new System.Drawing.Point(24, 585);
             this.dfsBox.Margin = new System.Windows.Forms.Padding(5);
             this.dfsBox.Name = "dfsBox";
             this.dfsBox.Size = new System.Drawing.Size(173, 24);

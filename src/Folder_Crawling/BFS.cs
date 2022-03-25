@@ -10,6 +10,7 @@ namespace Folder_Crawling
 		private string startingFolder; // Starting Folder
 		private bool findAll; // FindAllOccurences
         private bool found;
+        private string solution;
 		private List<string[]> AdjacentVertices { get; set; } // Simpul-simpul yang berdekatan (keseluruhan folder dan file yang bertetanggaan dengan current node) 
         private List<(int, string, string)> ListDirectories {get; set; } // List of tuple yang berisi seluruh folder dan file yang ada di dalam startingFolder
                                                                          // Item1 bernilai 0 jika current node berupa folder dan bernilai 1 jika berupa file
@@ -23,6 +24,7 @@ namespace Folder_Crawling
 			this.startingFolder = startingFolder;
 			this.findAll = findAll;
 			this.AdjacentVertices = new List<string[]>();
+            this.solution = "";
             this.ListDirectories = new List<(int, string, string)>()
             {
                 (0, startingFolder, startingFolder)
@@ -95,9 +97,6 @@ namespace Folder_Crawling
 
             queue.Enqueue(startVertex);
 
-            List<string> allhead = new List<string>();
-            allhead.Add(GetLast(this.startingFolder));
-            int iterate = 0;
 
             while(queue.Count != 0)
             {
@@ -108,6 +107,7 @@ namespace Folder_Crawling
 
                 if (this.ListDirectories[startVertex].Item1 == 1) {
                     if (this.ListDirectories[startVertex].Item2 == filename) {
+                        this.solution += this.ListDirectories[startVertex].Item3;
                         Console.WriteLine(this.ListDirectories[startVertex].Item3);
                         this.found = true;
                         if (!findAll) {
@@ -120,7 +120,7 @@ namespace Folder_Crawling
                         for (int i = 0; i < this.AdjacentVertices[startVertex].Length; i++)
                         {
                             string vertex = this.AdjacentVertices[startVertex][i];
-                            Form1.graph.AddEdge(allhead[iterate], GetLast(vertex));
+                            Form1.graph.AddEdge(this.ListDirectories[startVertex].Item2, GetLast(vertex));
                             int idxvertex = GetIndex(vertex);
                             if (!visited[idxvertex])
                             {   
@@ -142,7 +142,7 @@ namespace Folder_Crawling
             return toSplit[toSplit.Length - 1];
         }
 		//Aku kepikirannya buat bfs nya ngisi di sini gitu, nanti dipanggil di main
-		public void Run()
+		public string Run()
 		{
             /*
 			Console.WriteLine("Masukkan path folder:");
@@ -157,7 +157,8 @@ namespace Folder_Crawling
             
             Console.WriteLine("List of visited nodes: ");
             this.DoBFS(0, this.filename);
-		}
+            return this.solution;
+        }
 
 	}
 	
